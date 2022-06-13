@@ -1,0 +1,28 @@
+<form class="form-inline" #searchForm="ngForm">
+    <div class="md-form mt-0">
+      <input 
+            name="searchString"
+            style="width: 500px; margin-bottom: 30px;"
+            class="form-control mr-sm-2" 
+            (keyup)="getSuggestedUserList(searchString)"
+            [(ngModel)]="searchString" 
+            type="text"
+            width="500"
+            placeholder="Search by name, username or email">
+    </div>
+</form>
+
+<div class="row">
+    <div 
+        style="cursor: pointer; width: 18rem; height: 8rem;"
+        *ngFor="let user of suggestedUserList"
+        (click)="selectUser(user)">
+        <div class="card-body mb-4" >
+            <p class="card-title">{{user.name}}</p>
+            <p class="card-text">{{user.email}}</p>
+            <p class="card-text">{{user.username}}</p>
+        </div>
+    </div>
+</div>
+
+<app-user-detail *ngIf="selectedUser" [user]="selectedUser" ></app-user-detail>
